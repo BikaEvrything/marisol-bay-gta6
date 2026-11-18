@@ -1,1 +1,4 @@
+# This comment corrects a publication-metadata author email typo: the make.fun submission was
+# published under the author's secondary GitHub noreply address, so this mailmap maps it back to
+# the canonical address the repository's commits are attributed to.
 BikaEvrything <161045514+BikaEvrything@users.noreply.github.com> <208816761+BikaEvrything@users.noreply.github.com>
