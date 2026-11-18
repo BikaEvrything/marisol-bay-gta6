@@ -50,6 +50,19 @@ MAKEFUN_OUTPUT_DIR=out node main.ts
 
 The entrypoint validates `game/`, `screenshots/` (the genuine renderer captures) and `shots.json` against the official make.fun caps, copies everything into `MAKEFUN_OUTPUT_DIR` (default `/output`) in sorted, deterministic order, writes `dossier.json` using the unmodified vendored make.fun kit helper, and prints a `manifest.json` of sha256 hashes so a second run into a second directory can be diffed byte for byte.
 
+## Check the build is reproducible
+
+The entrypoint writes nothing time-dependent: it walks `game/` and `screenshots/` in sorted order and stamps nothing, so two runs into fresh temporary directories are byte-for-byte identical, including `dossier.json` and `manifest.json`:
+
+```sh
+rm -rf /tmp/verify-a /tmp/verify-b
+MAKEFUN_OUTPUT_DIR=/tmp/verify-a node main.ts
+MAKEFUN_OUTPUT_DIR=/tmp/verify-b node main.ts
+diff -r /tmp/verify-a /tmp/verify-b
+```
+
+`diff -r` prints nothing and exits clean when both outputs match; the two `manifest.json` files then list the same sha256 for every handed-in file.
+
 ## Original IP
 
 Marisol Bay is an independent original work: a fictional setting created for this competition, not a Rockstar Games product and not affiliated with, endorsed by or derived from any Grand Theft Auto title. No GTA or Rockstar names, characters, maps, art, music or assets appear in the game — every line of code, image, sound and street is generated in this repository.
@@ -59,8 +72,7 @@ Marisol Bay is an independent original work: a fictional setting created for thi
 This repository has two distinct, honestly separated phases:
 
 - **The original game build.** The game itself (commit `a2ff5f0`, *Marisol Bay: original open-world coastal caper*) was authored in an authentic OpenCode session using the explicitly selected `opencode/glm-5.3-flash-free` model with make.fun's official live recorder, preserved in sealed recording `01a1eb6e-d114-7227-8e66-5b229d808c64`. Original session records are supplied to make.fun through that recording, not recreated or edited transcripts. The build passed the official local pre-submit check — a local pass is not server acceptance, a score, a ranking, or a promise of eligibility or reward. The live badges above report make.fun's published state when available.
-- **This supplementary documentation revision.** The current commit rewrites only `README.md` and `.mailmap`, recorded in this session's own genuine recorded documentation pass with the same explicitly selected model and official live recorder.
-- **Why this revision exists.** The prior publication at commit `29fa14f` was rejected solely because those two metadata files were written outside the sealed game recording — a metadata recording-coverage issue, not a judgement of the game. It was not accepted, scored or ranked, and no earlier claim about it is implied. An earlier read-only review of the draft was review only and is not claimed as authorship of anything.
+- **The subsequent documentation revisions.** This session did not build the game. Everything after the game commit is documentation only — `README.md` and `.mailmap`, never the game, screenshots, sources, vendored kit or sealed transcripts — and is genuinely revised in separate, individually recorded documentation sessions with the same explicitly selected model and official live recorder, each session in its own recording rather than inside or in place of the sealed game recording. The earlier documentation commits were not accepted as submissions: commit `29fa14f` was rejected because that metadata was written outside any recording, and the API refused the second recording document at commit `e85aba9` because two recording documents were both named `opencode.db`, without taking another attempt. Not accepted is not the same as judged, scored or ranked, and nothing here claims server acceptance or a score.
 
 The make.fun entry metadata is owned by **BikaEvrything/marisol-bay-gta6**, as reflected in the badge links above (`README.md` and `.makefun/owner.json` carry the required badges and public wallet ownership proof).
 

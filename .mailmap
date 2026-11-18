@@ -1,4 +1,4 @@
-# This comment corrects a publication-metadata author email typo: the make.fun submission was
-# published under the author's secondary GitHub noreply address, so this mailmap maps it back to
-# the canonical address the repository's commits are attributed to.
+# A publication-metadata commit was made with an incorrect numeric GitHub noreply ID in its
+# author email. This mapping corrects that typo to BikaEvrything's verified account ID 161045514;
+# the other noreply ID is a separate account and is not claimed here as this one.
 BikaEvrything <161045514+BikaEvrything@users.noreply.github.com> <208816761+BikaEvrything@users.noreply.github.com>
